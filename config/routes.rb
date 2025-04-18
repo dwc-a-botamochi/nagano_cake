@@ -21,4 +21,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     end
   end
 
+  get 'about' => 'public/homes#about'
+
 end

@@ -30,7 +30,7 @@
               </td>
               <td class="pt-4">
                 #delimited:数値をカンマ区切りの形式にするオプション
-                #商品モデルにwith_tax_priceを定義してもらう！
+                #1．商品モデルに税込み価格を求めるメソッド（with_tax_price）を定義してもらう
                 <%= cart_item.item.with_tax_price.to_s(:delimited) %>
               </td>
               <td class="pt-3">

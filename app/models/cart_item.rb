@@ -1,5 +1,5 @@
 class CartItem < ApplicationRecord
-  #商品モデルに has_many :cart_items, dependent: :destroy 追加する！
+  #1．商品モデルに has_many :cart_items, dependent: :destroy 追加する
   belongs_to :customer
   belongs_to :item
 
