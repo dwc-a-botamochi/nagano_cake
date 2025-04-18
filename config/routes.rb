@@ -14,11 +14,22 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   scope module: :public do
-    resources :cart_items, only:[:index, :update, :destroy, :create,] do
+
+    #カート内商品
+    resources :cart_items, only:[:index, :update, :destroy, :create] do
       collection do
         delete  'destroy_all'
       end
     end
+
+    #注文
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'check'
+        get 'thanks'
+      end
+    end
+
   end
 
   get 'about' => 'public/homes#about'
