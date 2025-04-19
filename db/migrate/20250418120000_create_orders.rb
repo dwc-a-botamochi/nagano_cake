@@ -8,7 +8,6 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.integer :shipping_cost, null: false
       t.integer :total_payment, null: false
-      #デフォルト値は必要ないのか確認
       t.integer :payment_method, null: false
       t.integer :status, null: false, default: 0
 
