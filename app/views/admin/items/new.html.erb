@@ -1,0 +1,37 @@
+<h2>商品新規登録</h2>
+    <%= form_with model: @item do |f| %>
+        <table>
+            <tr>
+                <td><label class="form-label">商品画像</label></td>
+                <td><%= f.file_field :image, accept: "image/*", class: "w-100" %></td>
+            </tr>
+            <tr>
+                <td><label class="form-label">商品名</label></td>
+                <td><%= f.text_field :name, class: "form-control", placeholder: "商品名" %></td>
+            </tr>
+            <tr>
+                <td><label class="form-label"> 商品説明</label></td>
+                <td><%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "ここに説明文を記述します" %></td>
+            </tr>
+            <tr>    
+                <td><label class="form-label">税抜価格</label></td>
+                <td><%= f.text_field :price, class: "form-control", placeholder: "1000" %></td>
+            </tr>
+            <tr>
+            <td><label class="form-label">販売ステータス</label></td>
+            <td><div class="form-check form-check-inline">
+                    <%= f.radio_button :is_active, true, class: "form-check-input"  %>
+                    <%= f.label :is_active, "販売中", class: "form-check-label" %>
+                </div>
+                <div class="form-check form-check-inline">
+                    <%= f.radio_button :is_active, false, class: "form-check-input"  %>
+                    <%= f.label :is_active, "販売停止中", class: "form-check-label" %>
+                </div>
+            </td>
+            </tr>
+            <tr>
+            <td></td>
+            <td><%= f.submit '新規登録' %></td>
+            </tr>
+        </table>
+    <% end %>
