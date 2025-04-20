@@ -1,0 +1,14 @@
+<div class="container m-0">
+  <div class="row mt-5 ml-5">
+    <div class="col">
+      <!-- ジャンル登録フォーム -->
+      <%= render "admin/genres/create_edit_form", genre: @genre %>
+    </div>
+  </div>
+  <div class="row mt-5 ml-5">
+    <div class="col">
+      <!-- ジャンル一覧表示 -->
+      <%= render "admin/genres/genres_index_table", genres: @genres %>
+    </div>
+  </div>
+</div>

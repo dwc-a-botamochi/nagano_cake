@@ -1,0 +1,15 @@
+<h1>Public:p14</h1>
+<div class="container"> 
+  <div class="row">
+    <div class="col">
+      <!-- 登録情報編集ページへのリンク -->
+      <%= render "public/customers/link_edit_info.html", customer: @customer %>
+
+      <!-- 登録情報表示 -->
+      <%= render "public/customers/customer_show", customer: @customer %>
+
+      <!-- 配送先、注文履歴ページへのリンク -->
+      <%= render "public/customers/link_form_show", customer: @customer %>
+    </div> 
+  </div> 
+</div>
