@@ -1,7 +1,4 @@
 <div class="container">
-  <div class="row ml-5 mt-4">
-    <h3 class="ml-5">注文情報確認</h3>
-  </div>
   <div class="row ml-5 mt-3">
     <div class="col-md-5">
       <table class="table table-bordered">
@@ -17,7 +14,7 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%= image_tag cart_item.item.image, (70,50) %>
+                <%= image_tag "画像パス", size: "70x50" %>
                 <%= cart_item.item.name %>
               </td>
               <td class="pt-4">
@@ -71,8 +68,8 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-md-8 text-center">
-      <%= form_with model: @order, url: orders_path, mothod: :post do |f| %>
+  <div class="col-md-4 mx-auto mt-3 mb-3 text-center">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
         <%= f.hidden_field :post_code %>
         <%= f.hidden_field :address %>
         <%= f.hidden_field :name %>
