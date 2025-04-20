@@ -1,0 +1,60 @@
+<div class="container justify-content-center"> 
+  <div class="row"> 
+    <div class="col">
+      <%#= render "customers/customers_index_table", customers: @customers %>
+    </div> 
+  </div> 
+</div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width: 30%"></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%#= form_with url:admin_customers_path,local:true do |f| %>
+    <%= form_with model: @customer,local:true do |f| %>
+      <tr>
+        <td>会員ID</td>
+      </tr> 
+      <tr>
+        <td>氏名</td>
+        <td>
+          <%= f.text_field :last_name %>  
+            <%= f.text_field :first_name %>
+        </td>
+      </tr> 
+      <tr>
+        <td>フリガナ</td>
+        <td>
+          <%= f.text_field :last_name_kana %>
+            <%= f.text_field :first_name_kana %>
+        </td>
+      </tr> 
+      <tr>
+        <td>郵便番号</td>
+        <td><%= f.text_field :post_code %></td>
+      </tr> 
+      <tr>
+        <td>電話番号</td>
+        <td><%= f.text_field :phone_number %></td>
+      </tr> 
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= f.text_field :email %></td>
+      </tr> 
+      <tr>
+        <td>会員ステータス</td>
+        <td><%#= form.radio_button :is_active %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit class: 'btn btn-success' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,35 @@
+<table class="table table-bordered" style="width: 60%">
+  <tbody>
+    <%= form_with model:customer,local:true do |f| %>
+      <tr>
+        <td class="table-active" style="width: 15%">氏名</td>
+        <%= f.text_field :customer.last_name, value: @customer.last_name %>"  "
+        <%= f.text_field :customer.first_name, value: @customer.first_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>フリガナ</td>
+        <td>
+          <%= f.text_field :customer.last_name_kana, value: @customer.last_name_kana %>"  "
+            <%= f.text_field :customer.first_name_kana, value: @customer.first_name_kana %>
+        </td>
+      </tr>
+      <tr>
+        <td>郵便番号</td>
+        <td><%= f.text_field :customer.post_code, value: @customer.post_code %></td>
+      </tr>
+      <tr>
+        <td class="table-active">住所</td>
+        <td><%= customer.address %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= f.text_field :customer.phone_number, value: @customer.phone_number %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= f.text_field :customer.email, value: @customer.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
