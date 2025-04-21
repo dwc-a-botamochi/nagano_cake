@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root :to =>"homes#top"
+  root :to =>"public/homes#top"
+  get 'about' => 'public/homes#about
 
   # 顧客用
   # URL /customers/sign_in ...
@@ -15,8 +16,6 @@ Rails.application.routes.draw do
     patch "/customers/information", to: "customers#update"
     get   "/customers/check", to: "customers#check"
     patch "/customers/withdraw", to: "customers#withdraw"
-    #aboutページ
-    get 'about' => 'public/homes#about'
     #カート内商品
     resources :cart_items, only:[:index, :update, :destroy, :create] do
       collection do
@@ -41,7 +40,12 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    get '/' => 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    #注文
+    resources :orders, only:[:show, :update] do
+      resources :order_details, only:[:update]
+    end
   end
 end
