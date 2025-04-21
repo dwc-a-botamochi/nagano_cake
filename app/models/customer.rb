@@ -4,7 +4,9 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  #has_many :items, :addresses, :cart_items #dependent: :destroy
+  has_many :addresses
+  has_many :orders
+  has_many :cart_items
 
   validates :last_name, :first_name, :last_name_kana, :first_name_kana, 
             :post_code, :address, :phone_number, :email, presence: true       # 空でない

@@ -8,8 +8,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <% customers.each do |customer| %>
+    <% customers.each do |customer| %>
+      <tr>
         <td><%= customer.id %></td>
         <td> 
           <%= link_to admin_customer_path(customer.id) do %>
@@ -28,7 +28,8 @@
         </td>
       </tr>
     <% end %>
+    <tr>
+      <td colspan="4"><div class="d-flex justify-content-center"><%= paginate customers %></div></td>
+    </tr>
   </tbody>
 </table>
-
-<%= paginate customers %>

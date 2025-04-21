@@ -4,19 +4,27 @@ class Public::AddressesController < ApplicationController
   def index
     @addresses = Addresse.all
     @addresse = Addresse.new
+    @path_url = addresses_path
+    @submit_title = "新規登録"
   end
 
   def edit
     @addresse = Addresse.find(params[:id])
+    @path_url = address_path
+    @submit_title = "変更内容を保存"
   end
 
   def create
-    Addresse.new(addresse_params).save
+    addresse = Addresse.new(addresse_params)
+  	addresse.customer_id = current_customer.id
+  	addresse.save
     redirect_to action: 'index'
   end
 
   def update
-    Addresse.find(params[:id]).update(addresse_params)
+    addresse = Addresse.find(params[:id])
+    addresse.customer_id = current_customer.id
+    addresse.update(addresse_params)
     redirect_to action: 'index'
   end
 

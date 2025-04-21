@@ -1,5 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :active_check
 
   def show
     @customer = current_customer
@@ -10,8 +11,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    customer = current_customer(customer_params)
-    customer.update
+    customer = current_customer
+    customer.update(customer_params)
     redirect_to action: 'show'
   end
 
@@ -19,14 +20,20 @@ class Public::CustomersController < ApplicationController
   end
   
   def withdraw
-    customer = current_customer.is_active(params[:is_active])
-    customer.save
-      redirect_to root_path
-    end
+    current_customer.update(is_active: false)
+    # root_pathにするとヘッダーがログアウトのままになるのでshowアクションを選択して弾く
+    redirect_to action: 'show'
   end
 
   private
   
+  def active_check
+    unless current_customer.is_active
+      sign_out(current_customer)
+      redirect_to root_path
+    end
+  end
+
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, 
     :post_code, :address, :phone_number, :email)
