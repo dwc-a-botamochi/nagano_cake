@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root :to =>"homes#top"
-  get 'about' => 'public/homes#about'
+  get 'about', to: 'homes#about'
 
   # 顧客用
   # URL /customers/sign_in ...
