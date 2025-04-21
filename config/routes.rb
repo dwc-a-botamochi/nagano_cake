@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root :to =>"public/homes#top"
-  get 'about' => 'public/homes#about
+  root :to =>"homes#top"
+  get 'about' => 'public/homes#about'
 
   # 顧客用
   # URL /customers/sign_in ...
@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     patch "/customers/information", to: "customers#update"
     get   "/customers/check", to: "customers#check"
     patch "/customers/withdraw", to: "customers#withdraw"
-    # カート内商品
-    resources :cart_items, only: [:index, :update, :destroy, :create] do
+    #カート内商品
+    resources :cart_items, only:[:index, :update, :destroy, :create,] do
       collection do
-        delete 'destroy_all', to: 'cart_items#destroy_all'
+        delete 'destroy_all'
       end
     end
     #注文
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       end
     end
    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-    resource :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :items, only: [:index, :show]
   end
 
