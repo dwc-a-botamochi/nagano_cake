@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get   "/customers/check", to: "customers#check"
     patch "/customers/withdraw", to: "customers#withdraw"
 
-    resource :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
 
   # 管理者用

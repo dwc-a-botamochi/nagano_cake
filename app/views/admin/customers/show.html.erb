@@ -1,11 +1,8 @@
 <div class="container"> 
   <div class="row"> 
-    <div class="col offset-md-1">
+    <div class="col">
       <!-- 会員情報の表示 -->
-      <%= render "customers/customers_show", customer: @customer %>
-
-      <!-- リンクの表示 -->
-      <%= render "customers/link_from_show", customer: @customer %>
+      <%= render "admin/customers/customer_show", customer: @customer %>
     </div> 
   </div> 
 </div>
