@@ -19,8 +19,8 @@ ja:
   activerecord:
     errors:
       messages:
-        payment_method:
-          blank: "支払方法を選択してください"
-  date:
-      formats:
-        default: "%Y/%m/%d
+        payment_method_blank: "支払方法を選択してください"
+  time:
+    formats:
+      default: "%Y/%m/%d"  # デフォルトは年月日
+      long: "%Y/%m/%d %H:%M:%S"    # ロングは年月日と時分秒

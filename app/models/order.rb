@@ -6,4 +6,7 @@ class Order < ApplicationRecord
 
   enum payment_method: { credit_card: 0, transfer: 1 }
   enum status: { payment_pending: 0, payment_checked: 1, in_making: 2, preparing_shipping: 3, shipped: 4 }
+
+  # select_addressはデータベースに保存されない仮の属性として定義
+  attr_accessor :select_address
 end

@@ -9,7 +9,7 @@
       <h5><strong>購入者</strong></h5>
     </div>
     <div class="col-md-9 col-form-label">
-      <span><%= @order.customer.name %></span>
+      <span><%= "#{@order.customer.last_name} #{@order.customer.first_name}" %></span>
     </div>
     <div class="col-md-3 col-form-label">
       <h5><strong>注文日</strong></h5>
@@ -34,12 +34,11 @@
     </div>
     <div class="col-md-5 col-form-label">
       <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-        <%= f.select :status, order.statuses_i18n.invert, {prompt: false} %>
+        <%= f.select :status, Order.statuses_i18n.invert, {prompt: false} %>
         <%= f.submit "更新", class: "btn btn-success btn-sm ml-4" %>
       <% end %>
     </div>
   </div>
-
   <div class="row mt-4">
     <div class="col-md-8">
       <table class="table border-bottom">
@@ -61,9 +60,13 @@
               <td><%= order_detail.price.to_s(:delimited) %></td>
               <td><%= order_detail.amount %></td>
               <td><%= order_detail.subtotal.to_s(:delimited) %></td>
-              <%= form_with model: [@order, order_detail], url: admin_order_order_detail_path(@order,order_detail), method: :patch do |f| %>
-                <td><%= f.select :making_status, order_detail.making_statuses_i18n.invert, {prompt: false} %></td>
-                <td><%= f.submit "更新", class: "btn btn-success btn-sm" %></td>
+              <%= form_with model: [@order, order_detail], url: admin_order_order_detail_path(@order, order_detail), method: :patch do |f| %>
+                <td>
+                  <%= f.select :making_status, OrderDetail.making_statuses.map { |key, value| [I18n.t("enums.order_detail.making_status.#{key}"), value] }, { prompt: false }, { class: "form-control" } %>
+                </td>
+                <td>
+                  <%= f.submit "更新", class: "btn btn-success btn-sm" %>
+                </td>
               <% end %>
             </tr>
             <% total += order_detail.subtotal %>

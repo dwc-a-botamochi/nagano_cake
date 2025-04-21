@@ -5,6 +5,7 @@ class Public::OrdersController < ApplicationController
 
   def check
     @order = current_customer.orders.new(order_params)
+    # 住所情報の設定
     if params[:order][:select_address] == "0"
       @order.post_code = current_customer.post_code
       @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
@@ -14,12 +15,20 @@ class Public::OrdersController < ApplicationController
       @order.name = Address.find(params[:order][:address_id]).name
       @order.address = Address.find(params[:order][:address_id]).address
     end
+    # 送料の設定
     @order.shipping_cost = "800"
+    # カート情報の設定
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @order.total_payment = @total + @order.shipping_cost
+    # 支払方法のバリデーション
+    unless @order.payment_method.present?
+      @order = current_customer.orders.new
+      render :new
+    end
   end
   
+
   def thanks
   end
 
