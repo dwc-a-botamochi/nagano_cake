@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     patch "/customers/withdraw", to: "customers#withdraw"
 
     resource :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :items, only: [:index, :show]
   end
 
   # 管理者用
@@ -28,5 +29,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :items, except: [:destroy]
   end
 end
