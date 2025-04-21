@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   # 顧客用
   # URL /customers/sign_in ...
-  devise_for :customers,skip: [:passwords], controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: "public/sessions"
   }
 
   scope module: :public do
@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     patch "/customers/information", to: "customers#update"
     get   "/customers/check", to: "customers#check"
     patch "/customers/withdraw", to: "customers#withdraw"
-    #カート内商品
-    resources :cart_items, only:[:index, :update, :destroy, :create] do
+    # カート内商品
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
-        delete  'destroy_all'
+        delete 'destroy_all', to: 'cart_items#destroy_all'
       end
     end
     #注文
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
     resource :addresses, only: [:index, :edit, :create, :update, :destroy]
+    resources :items, only: [:index, :show]
   end
 
   # 管理者用
@@ -47,5 +48,6 @@ Rails.application.routes.draw do
     resources :orders, only:[:show, :update] do
       resources :order_details, only:[:update]
     end
+    resources :items, except: [:destroy]
   end
 end

@@ -1,0 +1,10 @@
+<%= image_tag @item.get_image(200,200) %>
+<p><%= @item.name %></p>
+<p><%= @item.introduction %>
+<p>￥<%= number_with_delimiter((@item.price * 1.1).floor) %>(税込)</p>
+
+<%= form_with model: @cart_item do |f| %>
+<%= f.hidden_field :item_id, :value => @item.id %>
+<%= f.select :amount, *[1..10] %>
+<%= f.submit 'カートに入れる' %>
+<% end %>
