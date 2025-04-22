@@ -1,10 +1,27 @@
-<%= image_tag @item.get_image(200,200) %>
-<p><%= @item.name %></p>
-<p><%= @item.introduction %>
-<p>￥<%= number_with_delimiter((@item.price * 1.1).floor) %>(税込)</p>
+<div class="container">
+    <div class = "row mt-5 mb-3">
+        <div class="col-md-6">
+            <%= image_tag @item.get_image(240,180), size: "320x240" %>
+        </div>
 
-<%= form_with model: @cart_item do |f| %>
-<%= f.hidden_field :item_id, :value => @item.id %>
-<%= f.select :amount, *[1..10] %>
-<%= f.submit 'カートに入れる' %>
-<% end %>
+        <div class="col-md-6 mt-1">
+        <h5 class="font-weight-bold mb-3"><%= @item.name %></h5>
+        <p class="mb-5"><%= @item.introduction %></p>
+        <p class="mb-5">
+            <span class="font-weight-bold">￥<%= number_with_delimiter((@item.price * 1.1).floor) %></span>
+            <small class="ms-1">(税込)</small>
+        </p>
+
+        <%= form_with model: @cart_item do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <div class="d-flex align-items-center">
+            <div class="col-auto">
+            <%= f.select :amount, (1..10).to_a, { prompt: "個数選択" }, class: 'form-control' %>
+            </div>
+            <div class="col-auto">
+            <%= f.submit 'カートに入れる', class: 'btn btn-success px-4 ms-3' %>
+            </div>
+        </div>
+        <% end %>        
+    </div>
+</div>

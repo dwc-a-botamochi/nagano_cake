@@ -1,1 +1,30 @@
-Top
+<div class="container">
+    <div class="row mt-3 mb-3">
+        <div class="col">
+            <p>ようこそ、ながのCAKEへ！</p>
+            <p>このサイトは、ケーキ販売のECサイトになります。</p>
+            <p>会員でない方も商品の閲覧はできますが、</p>
+            <p>購入には会員登録が必要になります。</p>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <div class="col">
+        <h4>新着商品</h4>
+        </div>
+    </div>
+    <div class="row">
+    <% @items.each do |item| %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-1">
+        <%= link_to item_path(item) do %>
+            <%= image_tag item.get_image(200,150), size: "200x150" %>
+            <p class="text-dark mt-2"><%= item.name %></p>
+            <p class="text-dark mt-1">￥<%= number_with_delimiter((item.price * 1.1).floor) %></p>
+        <% end %>
+        </div>
+    <% end %>
+        <div class="col text-right">
+            <%= link_to "全ての商品を見る>", items_path %>
+        </div>
+    </div>
+</div>
