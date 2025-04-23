@@ -1,4 +1,4 @@
-<%= form_with model: [:public, addresse], url: path_url, local: true do |f| %>
+<%= form_with model: [:public, address], url: path_url, local: true do |f| %>
   <table class="table table-borderless" style="width: 80%">
     <tbody>
       <tr>
@@ -14,7 +14,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><%= f.label :name, "住所" %></td>
+        <td><%= f.label :name, "宛名" %></td>
         <td><%= f.text_field :name, placeholder: "令和道子" %></td>
         <td><%= f.submit submit_title, class: 'btn btn-success' %></td>
       </tr>

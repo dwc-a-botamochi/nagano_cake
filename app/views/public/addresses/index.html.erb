@@ -10,7 +10,7 @@
     <div class="col">
       <!-- 配送先登録フォーム表示 -->
       <%= render "public/addresses/create_edit_form", 
-        addresse: @addresse, path_url: @path_url, submit_title: @submit_title%>
+        address: @address, path_url: @path_url, submit_title: @submit_title%>
 
       <!-- 配送先一覧表示 -->
       <%= render "public/addresses/addresses_index_table", addresses: @addresses %>

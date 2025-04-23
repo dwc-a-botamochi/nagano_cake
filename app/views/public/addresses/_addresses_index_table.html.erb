@@ -8,14 +8,14 @@
     </tr>
   </thead>
   <tbody>
-    <% addresses.each do |addresse| %>
+    <% addresses.each do |address| %>
       <tr>
-        <td class="border border-dark"><%= addresse.post_code %></td>
-        <td class="border border-dark"><%= addresse.address %></td>
-        <td class="border border-dark"><%= addresse.name %></td>
+        <td class="border border-dark"><%= address.post_code %></td>
+        <td class="border border-dark"><%= address.address %></td>
+        <td class="border border-dark"><%= address.name %></td>
         <td class="border border-dark">
-          <%= link_to "編集する", edit_address_path(addresse.id), class: 'btn btn-success' %>
-          <%= link_to "削除する", address_path(addresse.id), class: 'btn btn-success', method: :delete %>
+          <%= link_to "編集する", edit_address_path(address.id), class: 'btn btn-success' %>
+          <%= link_to "削除する", address_path(address.id), class: 'btn btn-danger', method: :delete %>
         </td>
       </tr>
     <% end %>

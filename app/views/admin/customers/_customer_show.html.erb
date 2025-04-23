@@ -38,9 +38,9 @@
       <td>会員ステータス</td>
       <td>
         <% if customer.is_active == true %>
-          <div style="color: red;">有効</div>
+          <div style="color: green;">有効</div>
         <% elsif customer.is_active == false %>
-          <div style="color: green;">退会</div>
+          <div style="color: gray;">退会</div>
         <% else %>
           <p>エラー</p>
         <% end %>

@@ -19,11 +19,9 @@
         <td><%= customer.email %></td>
         <td>
           <% if customer.is_active == true %>
-            <div style="color: red;">有効</div>
+            <div style="color: green;">有効</div>
           <% elsif customer.is_active == false %>
-            <div style="color: green;">退会</div>
-          <% else %>
-            <p>エラー</p>
+            <div style="color: gray;">退会</div>
           <% end %>
         </td>
       </tr>
