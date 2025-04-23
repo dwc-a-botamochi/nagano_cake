@@ -1,14 +1,21 @@
-<div class="container m-0"> 
-  <div class="row mt-5 ml-5"> 
+<div class="container">
+  <div class="row">
+    <div class="col-2 mt-5 ml-3">
+    <h4 class="text-center bg-light">マイページ</h4>
+    </div>
+  </div>
+</div>
+<div class="container m-0">
+  <div class="row mt-5 ml-5">
     <div class="col">
       <!-- 登録情報編集ページへのリンク -->
-      <div><%= render "public/customers/link_edit_info.html", customer: @customer %></div>
+      <div><%= render "public/customers/header link from show.html", customer: @customer %></div>
 
       <!-- 登録情報表示 -->
       <div class="my-3"><%= render "public/customers/customer_show", customer: @customer %></div>
 
       <!-- 配送先、注文履歴ページへのリンク -->
-      <div><%= render "public/customers/link_form_show", customer: @customer %></div>
-    </div> 
-  </div> 
+      <div><%= render "public/customers/footer link from show", customer: @customer %></div>
+    </div>
+  </div>
 </div>
