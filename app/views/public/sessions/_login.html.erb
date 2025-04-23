@@ -1,0 +1,15 @@
+<%= form_with scope: scope, url: url, local: true do |f| %>
+    <div class="form-group">
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :password, "パスワード" %><br />
+    <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.submit "ログイン", class: "btn btn-primary w-25" %>
+    </div>
+<% end %>

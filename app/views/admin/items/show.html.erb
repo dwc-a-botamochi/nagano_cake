@@ -1,41 +1,44 @@
 <div class="container">
     <div class="row mt-3 mb-3">
-    <h4>商品詳細</h4>
+        <div class="col">
+            <h4>商品詳細</h4>
+        </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-sm-4">
-        <%= image_tag @item.get_image(200,200) %>
+    <div class="row">
+        <div class="col-md-6">
+        <%= image_tag @item.get_image(320,240), size: "320x240" %>
         </div>
 
-        <div class="col-sm-8">
-        <table>
+        <div class="col-md-6 mt-1">
+        <table class="w-100">
             <tr>
-                <td>商品名</td>
-                <td><%= @item.name %></td>
+                <td class="pe-3 pb-3">商品名</td>
+                <td class="pb-3"><%= @item.name %></td>
             </tr>
-                <td>商品説明</td>
-                <td><%= @item.introduction %></td>
-            </tr>
-            <tr>
-                <td>ジャンル</td>
-                <td><%= @item.genre.name %></td>
+                <td class="pe-3 pb-3 align-top">商品説明</td>
+                <td class="pb-3"><%= simple_format(@item.introduction) %></td>
             </tr>
             <tr>
-                <td>税込価格(税抜価格)</td>
-                <td><%= number_with_delimiter((@item.price * 1.1).floor) %>
+                <td class="pe-3 pb-3">ジャンル</td>
+                <td class="pb-3"><%= @item.genre.name %></td>
+            </tr>
+            <tr>
+                <td class="pe-3 pb-3">税込価格(税抜価格)</td>
+                <td class="pb-3"><%= number_with_delimiter((@item.price * 1.1).floor) %>
                 (<%= number_with_delimiter(@item.price) %>)
                 円</td>
             </tr>
             <tr>
-                <td>販売ステータス</td>
-                <td><span style="color: <%= @item.is_active ? 'green' : 'gray' %>;">
+                <td class="pe-3 pb-3">販売ステータス</td>
+                <td class="pb-3"><span style="color: <%= @item.is_active ? 'green' : 'gray' %>;">
                 <%= @item.is_active ? '販売中' : '販売停止中' %>
                 </span></td>
             </tr>
         </table>
-        <br>
-        <%= link_to '編集する', edit_admin_item_path(params[:id]), class: 'btn btn-success' %>
+        <div class="text-center">
+        <%= link_to '編集する', edit_admin_item_path(params[:id]), class: 'btn btn-success text-center' %>
+        </div>
         </div>
     </div>
 </div>

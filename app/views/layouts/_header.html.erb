@@ -1,78 +1,103 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a href="/"><span>logo</span></a>
-        <ul class="navbar-nav ml-auto">
+      <div class="d-flex w-100 align-items-center justify-content-between">
+      
+        <div class="flex-shrink-0">
+        <%= link_to image_tag("logo.jpg", size: "100x75"), root_path %>
+        </div>
+
+        <% if customer_signed_in? %>
+          <div class="flex-grow-1 text-center">
+            <span class="navbar-text text-nowrap">
+              ようこそ、<%= current_customer.last_name %>さん！
+            </span>
+          </div>
+        <% else %>
+          <div class="flex-grow-1"></div>
+        <% end %>
+
+        <div class="flex-shrink-0">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="collapse navbar-collapse justify-content-end mt-2" id="navbarNavDropdown">
+      <ul class="navbar-nav d-flex flex-row">
         <% if admin_signed_in? %>
-                <li>
-                <%= link_to admin_items_path, class: 'btn btn-outline-secondary' do %>
+                <li class="nav-item mx-1">
+                <%= link_to admin_items_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                     商品一覧
                 <% end %>
                 </li>
-                <li>
-                <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+                <li class="nav-item mx-1">
+                <%= link_to root_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                     会員一覧
                 <% end %>
                 </li>
-                <li>
-                <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+                <li class="nav-item mx-1">
+                <%= link_to root_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                     注文履歴一覧
                 <% end %>
                 </li>
-                <li>
-                <%= link_to admin_genres_path, class: 'btn btn-outline-secondary' do %>
+                <li class="nav-item mx-1">
+                <%= link_to admin_genres_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                     ジャンル一覧
                 <% end %>
                 </li>
-                <li>
-                <%= link_to destroy_admin_session_path, class: 'btn btn-outline-secondary', method: :delete do %>
+                <li class="nav-item mx-1">
+                <%= link_to destroy_admin_session_path, class: 'btn btn-outline-secondary text-nowrap', method: :delete do %>
                     ログアウト
                 <% end %>
                 </li>
         <% elsif customer_signed_in? %>
-          <li>
-            <%= link_to customers_my_page_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to customers_my_page_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                 マイページ
             <% end %>
           </li>
-          <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to items_path, class: 'btn btn-outline-secondary text-nowrap' do %>
               商品一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to root_path, class: 'btn btn-outline-secondary text-nowrap' do %>
               カート
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_customer_session_path, class: 'btn btn-outline-secondary', method: :delete do %>
+          <li class="nav-item mx-1">
+            <%= link_to destroy_customer_session_path, class: 'btn btn-outline-secondary text-nowrap', method: :delete do %>
               ログアウト
             <% end %>
           </li>
         <% else %>
-          <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to root_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                 About
             <% end %>
           </li>
-          <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to items_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                 商品一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to new_customer_registration_path, class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to new_customer_registration_path, class: 'btn btn-outline-secondary text-nowrap' do %>
                 新規登録
             <% end %>
           </li>
-          <li>
-            <%= link_to new_customer_session_path , class: 'btn btn-outline-secondary' do %>
+          <li class="nav-item mx-1">
+            <%= link_to new_customer_session_path , class: 'btn btn-outline-secondary text-nowrap' do %>
               ログイン
             <% end %>
           </li>
         <% end %>
-        </ul>
+      </ul>
+      </div>      
     </div>
   </nav>
 </header>

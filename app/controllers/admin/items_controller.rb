@@ -1,4 +1,6 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @items = Item.order(created_at: :asc).page(params[:page]).per(10)
   end
@@ -30,11 +32,13 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @genres = Genre.all
+
     if @item.update(item_params)
       redirect_to admin_item_path(@item)
     else
       render 'edit'
     end
+    
   end
 
   private
