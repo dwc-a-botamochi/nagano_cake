@@ -11,21 +11,23 @@ class Public::OrdersController < ApplicationController
       @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
       @order.address = current_customer.address
     elsif params[:order][:select_address] == "1"
-      @order.postal_code = Address.find(params[:order][:address_id]).post_code
+      @order.post_code = Address.find(params[:order][:address_id]).post_code
       @order.name = Address.find(params[:order][:address_id]).name
       @order.address = Address.find(params[:order][:address_id]).address
+    elsif params[:order][:select_address] == "2"
+      # 新しいお届け先が入力条件に合わない場合、再度入力を行う
+      unless @order.post_code.to_s.length == 7 && @order.post_code.to_s.match?(/^[0-9]+$/) && @order.address != "" && @order.name != "" 
+        render :new
+      end
     end
+    
     # 送料の設定
     @order.shipping_cost = "800"
     # カート情報の設定
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @order.total_payment = @total + @order.shipping_cost
-    # 支払方法のバリデーション
-    unless @order.payment_method.present?
-      @order = current_customer.orders.new
-      render :new
-    end
+    
   end
   
 
@@ -35,6 +37,11 @@ class Public::OrdersController < ApplicationController
   def create
     cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
+    if @order.payment_method == ""
+      @order.payment_method = "a"
+    else
+  
+
     if @order.save
       cart_items.each do |cart_item|
         order_detail = OrderDetail.new
@@ -47,9 +54,10 @@ class Public::OrdersController < ApplicationController
       redirect_to thanks_orders_path
       cart_items.destroy_all
     else
-      @order = Order.new
+      #@order = Order.new
       render :new
     end
+  end
   end
 
   def index
@@ -63,7 +71,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:post_code, :address, :name, :shipping_cost, :total_payment, :payment_method )
+    params.require(:order).permit(:post_code, :address, :name, :shipping_cost, :total_payment, :payment_method, :select_address )
   end
 end
 
