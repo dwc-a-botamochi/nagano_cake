@@ -1,15 +1,19 @@
-<h1>Public:p14</h1>
-<div class="container"> 
+<div class="container m-0">
+  <div class="row ml-5">
+    <div class="col-3 my-5 ml-5">
+    <h4 class="text-center bg-light">配送先登録/一覧</h4>
+    </div>
+  </div>
+</div>
+<div class="container ml-5">
   <div class="row">
     <div class="col">
-      <!-- 登録情報編集ページへのリンク -->
-      <%= render "public/customers/link_edit_info.html", customer: @customer %>
+      <!-- 配送先登録フォーム表示 -->
+      <%= render "public/addresses/create_edit_form", 
+        address: @address, path_url: @path_url, submit_title: @submit_title%>
 
-      <!-- 登録情報表示 -->
-      <%= render "public/customers/customer_show", customer: @customer %>
-
-      <!-- 配送先、注文履歴ページへのリンク -->
-      <%= render "public/customers/link_form_show", customer: @customer %>
-    </div> 
-  </div> 
+      <!-- 配送先一覧表示 -->
+      <%= render "public/addresses/addresses_index_table", addresses: @addresses %>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,15 @@
+<!-- indexページで表示 -->
 <% if genre.id.nil? %>
-  <%= form_with model: [:admin, genre] do |f| %>
+  <%= form_with model: [:admin, genre], local: true do |f| %>
     <div>
       <%= f.label :name, "ジャンル名" %>
-      <span class="col  ml-5 mr-5"><%= f.text_field :name, placeholder:"ジャンル名" %></span>
+      <span class="col  ml-5 mr-5"><%= f.text_field :name, placeholder: "ジャンル名" %></span>
       <%= f.submit "新規登録", class: 'btn btn-success' %>
     </div>
   <% end %>
+<!-- editページで表示 -->
 <% else %>
-  <%= form_with model: [:admin, genre] do |f| %>
+  <%= form_with model: [:admin, genre], local: true do |f| %>
     <div>
       <%= f.label :name, "ジャンル名" %>
       <span class="col  ml-5 mr-5"><%= f.text_field :name %></span>
