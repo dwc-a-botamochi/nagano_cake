@@ -1,32 +1,36 @@
 <div class="container">
-  <div class="row ml-1 mt-5">
-    <h3 class="ml-5">注文情報確認</h3>
+  <div class="row">
+    <div class="col-2 mt-5 ml-3">
+      <h4 class="text-center bg-light">注文情報確認</h4>
+    </div>
   </div>
-  <div class="row ml-5 mt-3">
+</div>
+<div class="container-field">
+  <div class="row my-3 mx-auto" style="width: 85%;">
     <div class="col-8">
-      <table class="table table-bordered">
+      <table class="table table-bordered" >
         <thead>
-          <tr class="bg-light">
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
+          <tr class="table-active">
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 46%;">商品名</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">単価(税込)</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">数量</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">小計</th>
           </tr>
         </thead>
         <tbody>
           <% @cart_items.each do |cart_item| %>
             <tr>
-              <td>
+              <td class="border border-dark align-middle" style="width: 46%;">
                 <%= image_tag cart_item.item.get_image(70, 50) %> &nbsp;
                 <%= cart_item.item.name %>
               </td>
-              <td class="pt-4">
+              <td class="border border-dark align-middle" style="width: 18%;">
                 <%= (cart_item.item.price * 1.1).floor.to_s(:delimited) %>
               </td>
-              <td class="pt-4">
+              <td class="border border-dark align-middle" style="width: 18%;">
                 <%= cart_item.amount %>
               </td>
-              <td class="pt-4">
+              <td class="border border-dark align-middle" style="width: 18%;">
                 <%= cart_item.subtotal.to_s(:delimited) %>
               </td>
             </tr>
@@ -34,39 +38,38 @@
         </tbody>
       </table>
     </div>
-    <div class="col-4">
+    <div class="col-3">
       <table class="table table-bordered">
         <tr>
-          <th class="bg-light">送料</th>
-          <td><%= @order.shipping_cost %></td>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">送料</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @order.shipping_cost %></td>
         </tr>
         <tr>
-          <th class="bg-light">商品合計</th>
-          <td><%= @total.to_s(:delimited) %></td>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">商品合計</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @total.to_s(:delimited) %></td>
         </tr>
         <tr>
-          <th class="bg-light">請求金額</th>
-          <td><%= @order.total_payment.to_s(:delimited) %></td>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">請求金額</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @order.total_payment.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
   </div>
-  <div class="row ml-5 mt-3">
-    <div class="ml-3">
+  <div class="row mt-3 mx-auto" style="width: 84%;">
+    <div>
       <h3><strong>支払方法</strong></h3>
     </div>
-    <div class="ml-4">
+    <div class="ml-4 mt-2">
       <p><%= I18n.t("enums.order.payment_method.#{@order.payment_method.to_s}") %></p>
-      <p><%#= @order.payment_method %></p>
     </div>
   </div>
-  <div class="row ml-5 mt-3">
-    <div class="ml-3">
+  <div class="row mt-3 mx-auto" style="width: 84%;">
+    <div>
       <h3><strong>お届け先</strong></h3>
     </div>
     <div class="ml-4">
       <p>
-        〒<%= @order.post_code %> <%= @order.address %><br>
+        〒<%= @order.post_code %>&nbsp;<%= @order.address %><br>
         <%= @order.name %>
       </p>
     </div>

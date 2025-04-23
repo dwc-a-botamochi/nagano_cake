@@ -20,28 +20,17 @@ class Public::OrdersController < ApplicationController
         render :new
       end
     end
-    
     # 送料の設定
     @order.shipping_cost = "800"
     # カート情報の設定
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     @order.total_payment = @total + @order.shipping_cost
-    
   end
   
-
-  def thanks
-  end
-
   def create
     cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
-    if @order.payment_method == ""
-      @order.payment_method = "a"
-    else
-  
-
     if @order.save
       cart_items.each do |cart_item|
         order_detail = OrderDetail.new
@@ -53,11 +42,10 @@ class Public::OrdersController < ApplicationController
       end
       redirect_to thanks_orders_path
       cart_items.destroy_all
-    else
-      #@order = Order.new
-      render :new
     end
   end
+
+  def thanks
   end
 
   def index
