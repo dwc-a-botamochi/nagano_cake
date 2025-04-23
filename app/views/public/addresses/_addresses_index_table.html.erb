@@ -1,0 +1,23 @@
+<table class="table table-bordered" style="width: 70%">
+  <thead>
+    <tr class="table-active">
+      <th class="border border-dark" style="width: 15%">郵便番号</th>
+      <th class="border border-dark" style="width: 40%">住所</th>
+      <th class="border border-dark" style="width: 15%">宛名</th>
+      <th class="border border-dark" style="width: 40%"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% addresses.each do |address| %>
+      <tr>
+        <td class="border border-dark"><%= address.post_code %></td>
+        <td class="border border-dark"><%= address.address %></td>
+        <td class="border border-dark"><%= address.name %></td>
+        <td class="border border-dark">
+          <%= link_to "編集する", edit_address_path(address.id), class: 'btn btn-success' %>
+          <%= link_to "削除する", address_path(address.id), class: 'btn btn-danger', method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

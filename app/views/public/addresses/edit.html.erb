@@ -1,2 +1,16 @@
-<h1>Public::p15</h1>
-<p>Find me in app/views/public/addresses/resource.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-2 my-5">
+    <h4 class="text-center bg-light">配送先編集</h4>
+    </div>
+  </div>
+</div>
+<div class="container ml-5">
+  <div class="row">
+    <div class="col">
+      <!-- 配送先登録フォーム表示 -->
+      <%= render "public/addresses/create_edit_form", 
+        address: @address, path_url: @path_url, submit_title: @submit_title%>
+    </div>
+  </div>
+</div>
