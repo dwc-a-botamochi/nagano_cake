@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  root :to =>"homes#top"
-  get 'about', to: 'homes#about'
+  root :to =>"public/homes#top"
 
   # 顧客用
   # URL /customers/sign_in ...
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
+    get 'about', to: 'homes#about'
     get   "/customers/my_page", to: "customers#show"
     get   "/customers/information/edit", to: "customers#edit"
     patch "/customers/information", to: "customers#update"
