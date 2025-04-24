@@ -1,19 +1,11 @@
-<h2>管理者ログイン</h2>
-
-<%= form_with scope: :admin, url: admin_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <div class="col-3 my-5 ml-4">
+    <h4 class="text-center bg-light">管理者ログイン</h4>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+  <%= render "public/sessions/login", scope: :admin, url: admin_session_path %>
 
-<%= render "admin/shared/links" %>
+</div>

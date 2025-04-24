@@ -14,6 +14,9 @@ class Public::CartItemsController < ApplicationController
       cart_item.amount += params[:cart_item][:amount].to_i
       cart_item.save
       redirect_to cart_items_path
+    #個数選択が存在しない場合
+    elsif @cart_item.amount.nil?
+      redirect_to request.referer
     #同じ商品が存在しない場合
     elsif @cart_item.save
       redirect_to cart_items_path
