@@ -15,7 +15,7 @@
                 <% end %>
                 </li>
                 <li>
-                <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+                <%= link_to admin_path, class: 'btn btn-outline-secondary' do %>
                     注文履歴一覧
                 <% end %>
                 </li>
@@ -36,12 +36,12 @@
             <% end %>
           </li>
           <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+            <%= link_to items_path, class: 'btn btn-outline-secondary' do %>
               商品一覧
             <% end %>
           </li>
           <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+            <%= link_to cart_items_path, class: 'btn btn-outline-secondary' do %>
               カート
             <% end %>
           </li>
@@ -52,7 +52,7 @@
           </li>
         <% else %>
           <li>
-            <%= link_to root_path, class: 'btn btn-outline-secondary' do %>
+            <%= link_to about_path, class: 'btn btn-outline-secondary' do %>
                 About
             <% end %>
           </li>
