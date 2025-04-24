@@ -1,14 +1,14 @@
-<h2>商品一覧</h2>
 <div class="container">
   <div class="row">
-    <% @items.each do |item| %>
-        <div class = "col-3 mb-4">
-        <%= link_to item_path(item) do %>
-            <%= image_tag item.get_image(200,200) %>
-            <p><%= item.name %></p>
-            <p>￥<%= number_with_delimiter((item.price * 1.1).floor) %></p>
-        <% end %>
-        </div>
-    <% end %>
+    <div class="col-2 my-3">
+      <h4 class="text-center bg-light">商品一覧</h4>
+    </div>
+  </div>
+  
+  <div class="row">
+    <%= render 'index', items: @items %>
+  </div>
+  <div class="d-flex justify-content-center">
+  <%= paginate @items %>
   </div>
 </div>
