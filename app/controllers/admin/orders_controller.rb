@@ -9,8 +9,10 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: params[:id])
     if @order.update(order_params)
-      @order_details.update_all(making_status: 1) if @order.status == "payment_checked"
-    end
+      if @order.payment_checked?
+        @order.order_details.update_all(making_status: :making_pending)
+      end
+    end    
     redirect_to admin_order_path(@order)
   end
 

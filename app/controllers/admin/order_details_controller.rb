@@ -7,13 +7,16 @@ class Admin::OrderDetailsController < ApplicationController
     @order_details = @order.order_details.all
     is_updated = true
     if @order_detail.update(order_detail_params)
-      @order.update(status: 2) if @order_detail.making_status == "making"
+       #製作ステータスを製作中御→注文ステータスを製作中に更新
+      @order.update(status: :making) if @order_detail.making_status == "making"
       @order_details.each do |order_detail|
+        #製作ステータスが全て製作完了になっていないといけない
         if order_detail.making_status != "making_complete"
           is_updated = false
         end
       end
-      @order.update(status: 3) if is_updated
+      #全て製作完了→注文ステータスを発送準備中に更新
+      @order.update(status: :making_complete) if is_updated
     end
     redirect_to admin_order_path(@order)
   end
