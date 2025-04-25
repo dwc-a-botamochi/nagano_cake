@@ -21,8 +21,8 @@ class Public::CustomersController < ApplicationController
   
   def withdraw
     current_customer.update(is_active: false)
-    # root_pathにするとヘッダーがログアウトのままになるのでshowアクションを選択して弾く
-    redirect_to action: 'show'
+    sign_out(current_customer)
+    redirect_to root_path
   end
 
   private

@@ -1,9 +1,9 @@
 <% items.each do |item| %>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
+  <div class="mr-3">
     <%= link_to item_path(item) do %>
-        <%= image_tag item.get_image(160,120), size: "160x120" %>
-        <p class="text-dark pt-3 font-weight-bold"><%= item.name %></p>
-        <p class="text-dark pt-1 font-weight-bold">￥<%= number_with_delimiter((item.price * 1.1).floor) %></p>
+      <%= image_tag item.get_image(160,120), size: "160x120" %>
+      <p class="text-dark pt-3 font-weight-bold"><%= item.name %></p>
+      <p class="text-dark pt-1 font-weight-bold">￥<%= number_with_delimiter((item.price * 1.1).floor) %></p>
     <% end %>
-    </div>
+  </div>
 <% end %>

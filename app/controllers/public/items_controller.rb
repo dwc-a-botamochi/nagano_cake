@@ -5,6 +5,8 @@ class Public::ItemsController < ApplicationController
     #order(created_at: :desc):新着順に並べる
     #page(params[:page]):指定されたページ番号のデータ取得
     #per(8):1ページ当たり8件
+    
+    @genres = Genre.all
   end
 
   def show
