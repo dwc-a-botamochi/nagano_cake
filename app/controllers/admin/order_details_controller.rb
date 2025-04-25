@@ -4,19 +4,17 @@ class Admin::OrderDetailsController < ApplicationController
   def update
     @order = Order.find(params[:order_id])
     @order_detail = OrderDetail.find(params[:id])
-    @order_details = @order.order_details.all
-    is_updated = true
+
     if @order_detail.update(order_detail_params)
-       #製作ステータスを製作中御→注文ステータスを製作中に更新
-      @order.update(status: :making) if @order_detail.making_status == "making"
-      @order_details.each do |order_detail|
-        #製作ステータスが全て製作完了になっていないといけない
-        if order_detail.making_status != "making_complete"
-          is_updated = false
+      if @order_detail.making_complete?
+        order_details = @order.order_details
+        # order_detailモデルに記載してあるメソッドを呼び出す
+        if @order_detail.making_complete_checked(order_details)
+          @order.update(status: Order.statuses[:preparing_shipping])
         end
+      elsif @order_detail.making?
+        @order.update(status: Order.statuses[:in_making])
       end
-      #全て製作完了→注文ステータスを発送準備中に更新
-      @order.update(status: :making_complete) if is_updated
     end
     redirect_to admin_order_path(@order)
   end

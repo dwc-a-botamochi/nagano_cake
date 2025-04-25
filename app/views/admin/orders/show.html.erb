@@ -64,7 +64,7 @@
               <td><%= order_detail.subtotal.to_s(:delimited) %></td>
               <%= form_with model: [@order, order_detail], url: admin_order_order_detail_path(@order, order_detail), method: :patch do |f| %>
                 <td class="align-middle" style="text-align: center;">
-                  <%= f.select :making_status, OrderDetail.making_statuses.map { |key, value| [I18n.t("enums.order_detail.making_status.#{key}"), value] }, { prompt: false } %>&nbsp;
+                  <%= f.select :making_status, OrderDetail.making_statuses_i18n.invert, { prompt: false } %>&nbsp;
                   <%= f.submit "更新", class: "btn btn-success btn-sm" %>
                 </td>
               <% end %>
@@ -76,22 +76,22 @@
     </div>
     <div class="col-md-4 ml-5 d-flex align-items-end">
       <div class="row ml-5">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h5><strong>商品合計</strong></h5>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <h5><%= total.to_s(:delimited) %>円</h5>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h5><strong>送料</strong></h5>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <h5><%= @order.shipping_cost %>円</h5>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
           <h5><strong>請求金額合計</strong></h5>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <h5><strong><%= @order.total_payment.to_s(:delimited) %>円</strong></h5>
         </div>
       </div>
