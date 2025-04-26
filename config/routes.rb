@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     patch "/customers/information", to: "customers#update"
     get   "/customers/check", to: "customers#check"
     patch "/customers/withdraw", to: "customers#withdraw"
+    # ジャンル検索に使用
+    get '/genre/search', to: 'searches#genre_search'
+
     #カート内商品
     resources :cart_items, only:[:index, :update, :destroy, :create,] do
       collection do
