@@ -13,7 +13,11 @@
           </h4>
         <% end %>
       </div>
-      <div class="d-flex flex-wrap  offset-1"><%= render 'public/items/index', items: @items %></div>
+      <% if @items.total_count == 0%>
+        <div class="d-flex flex-wrap  offset-2"><h4><small>該当する商品はありません</small></h4></div>
+      <% else %>
+        <div class="d-flex flex-wrap  offset-1"><%= render 'public/items/index', items: @items %></div>
+      <% end %>
       <div class="d-flex justify-content-center mt-4"><%= paginate @items %></div>
     </div>
   </div>
