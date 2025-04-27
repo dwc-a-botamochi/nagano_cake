@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 mt-5 ml-3">
+      <h4 class="text-center bg-light">注文履歴一覧</h4>
+    </div>
+  </div>
+</div>
+<div class="container-field">
+  <div class="row my-3 mx-auto" style="width: 60%;">
+    <div class="col-md-12">
+      <table class="table table-hover border-bottom">
+        <thead>
+          <tr class="table-active">
+            <th style="width: 25%;">購入日時</th>
+            <th style="width: 25%;">購入者</th>
+            <th style="width: 25%;">注文個数</th>
+            <th style="width: 25%;">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= link_to admin_order_path(order), class: "text-dark" do %>
+                  <%= I18n.l(order.created_at, format: :long) %>
+                <% end %>
+              </td>
+              <td><%= "#{order.customer.last_name} #{order.customer.first_name}" %></td>
+              <td>
+                <% total = 0 %>
+                <% order.order_details.each do |order_detail| %>
+                  <% order_detail.amount %>
+                  <% total += order_detail.amount %>
+                <% end %>
+                <%= total %>
+              </td>
+              <td class="align-middle">
+                <%= I18n.t("enums.order.status.#{order.status}") %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+      <%= paginate @orders %>
+    </div>
+  </div>
+</div>

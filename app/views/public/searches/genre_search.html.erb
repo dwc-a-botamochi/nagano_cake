@@ -1,0 +1,18 @@
+<div class="container m-5"> 
+  <div class="row"> 
+    <div class="col-3 px-4"><%= render 'public/items/genre_list', genres: @genres %></div>
+    <div class="col-9">
+      <div class="col-7 py-3 ml-5">
+        <h4 class="text-center bg-light">
+          検索結果<small> <%= number_of_items_displayed(@items) %></small>
+        </h4>
+      </div>
+      <% if @items.total_count == 0 %>
+        <div class="d-flex flex-wrap  offset-2"><h4><small>該当する商品はありません</small></h4></div>
+      <% else %>
+        <div class="d-flex flex-wrap  offset-1"><%= render 'public/items/index', items: @items %></div>
+      <% end %>
+      <div class="d-flex justify-content-center mt-4"><%= paginate @items %></div>
+    </div>
+  </div>
+</div>

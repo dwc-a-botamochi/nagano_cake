@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 mt-5 ml-3">
+      <h4 class="text-center bg-light">注文情報確認</h4>
+    </div>
+  </div>
+</div>
+<div class="container-field">
+  <div class="row my-3 mx-auto" style="width: 85%;">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-active">
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 46%;">商品名</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">単価(税込)</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">数量</th>
+            <th class="border border-dark align-middle" style="font-weight: normal; width: 18%;">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td class="border border-dark align-middle" style="width: 46%;">
+                <%= image_tag cart_item.item.get_image(70, 50) %> &nbsp;
+                <%= cart_item.item.name %>
+              </td>
+              <td class="border border-dark align-middle" style="width: 18%;">
+                <%= (cart_item.item.price * 1.1).floor.to_s(:delimited) %>
+              </td>
+              <td class="border border-dark align-middle" style="width: 18%;">
+                <%= cart_item.amount %>
+              </td>
+              <td class="border border-dark align-middle" style="width: 18%;">
+                <%= cart_item.subtotal.to_s(:delimited) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <table class="table table-bordered">
+        <tr>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">送料</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @order.shipping_cost %></td>
+        </tr>
+        <tr>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">商品合計</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <th class="table-active border border-dark align-middle" style="font-weight: normal; width: 50%;">請求金額</th>
+          <td class="border border-dark align-middle" style="width: 50%;"><%= @order.total_payment.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-3 mx-auto" style="width: 84%;">
+    <div>
+      <h3><strong>支払方法</strong></h3>
+    </div>
+    <div class="ml-4 mt-2">
+      <p><%= I18n.t("enums.order.payment_method.#{@order.payment_method.to_s}") %></p>
+    </div>
+  </div>
+  <div class="row mt-3 mx-auto" style="width: 84%;">
+    <div>
+      <h3><strong>お届け先</strong></h3>
+    </div>
+    <div class="ml-4">
+      <p>
+        〒<%= @order.post_code %>&nbsp;<%= @order.address %><br>
+        <%= @order.name %>
+      </p>
+    </div>
+  </div>
+  <div class="row mt-3">
+  <div class="col-md-4 mx-auto mt-3 mb-3 text-center">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+        <%= f.hidden_field :post_code %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :shipping_cost, value: @order.shipping_cost %>
+        <%= f.hidden_field :total_payment, value: @order.total_payment %>
+        <%= f.hidden_field :payment_method %>
+        <%= f.submit "注文を確定する", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

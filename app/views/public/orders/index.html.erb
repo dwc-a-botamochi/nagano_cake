@@ -1,0 +1,62 @@
+<% if @orders.any? %>
+  <div class="container">
+    <div class="row">
+      <div class="col-2 mt-5 ml-3">
+        <h4 class="text-center bg-light">注文履歴一覧</h4>
+      </div>
+    </div>
+  </div>
+  <div class="container-feild">
+    <div class="row my-3" style="width: 80%; margin: 0 auto;">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="table-active">
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="10%">注文日</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="38%">配送先</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="20%">注文商品</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="10%">支払金額</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="10%">ステータス</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="12%">注文詳細</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="border border-dark align-middle">
+                <%= I18n.l(order.created_at, format: :default) %>
+              </td>
+              <td class="border border-dark align-middle">
+                〒<%= order.post_code %><br>
+                <%= order.address %><br>
+                <%= order.name %>
+              </td>
+              <td class="border border-dark align-middle">
+                <% order.order_details.each do |order_detail| %>
+                  <%= order_detail.item.name %><br>
+                <% end %>
+              </td>
+              <td class="border border-dark align-middle">
+                <%= order.total_payment.to_s(:delimited) %>円
+              </td>
+              <td class="border border-dark align-middle">
+                <%= I18n.t("enums.order.status.#{order.status}") %>
+              </td>
+              <td class="border border-dark align-middle text-center">
+                <%= link_to "表示する", order_path(order), class: "btn btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <div class="container-fluid">
+    <div class="row" style="margin-top: 200px; margin-bottom: 200px;">
+      <div class="col-md-12 text-center">
+        <h4>注文履歴はありません。</h4>
+        <%= link_to "商品一覧へ戻る", items_path, class: "btn btn-primary mt-3" %>
+      </div>
+    </div>
+  </div>
+<% end %>

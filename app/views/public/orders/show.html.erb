@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2 mt-5 ml-3">
+      <h4 class="text-center bg-light">注文履歴詳細</h4>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row ml-5 mt-3">
+    <div class="col-md-5">
+      <span><strong>注文情報</strong></span>
+      <table class="table table-bordered mt-2">
+        <tr>
+          <td class="border border-dark align-middle table-active" width="25%">注文日</td>
+          <td class="border border-dark align-middle" width="75%"><%= I18n.l(@order.created_at) %></td>
+        </tr>
+        <tr>
+          <td class="border border-dark align-middle table-active" width="20%">配送先</td>
+          <td class="border border-dark align-middle" width="80%">
+            〒<%= @order.post_code %><br>
+            <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <td class="border border-dark align-middle table-active" width="20%">支払方法</td>
+          <td class="border border-dark align-middle" width="80%"><%= I18n.t("enums.order.payment_method.#{@order.payment_method}") %></td>
+        </tr>
+        <tr>
+          <td class="border border-dark align-middle table-active" width="20%">ステータス</td>
+          <td class="border border-dark align-middle" width="80%"><%= I18n.t("enums.order.status.#{@order.status}") %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <span><strong>請求情報</strong></span>
+      <table class="table table-bordered mt-2">
+        <tr>
+          <% total = 0 %>
+          <% @order.order_details.each do |order_detail| %>
+            <% total += order_detail.subtotal %>
+          <% end %>
+          <td class="border border-dark align-middle table-active" width="55%">商品合計</td>
+          <td class="border border-dark align-middle" width="45%"><%= total.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <td class="border border-dark align-middle table-active" width="55%">配送料</td>
+          <td class="border border-dark align-middle" width="45%"><%= @order.shipping_cost %></td>
+        </tr>
+        <tr>
+          <td class="border border-dark align-middle table-active" width="55%"><strong>ご請求額</strong></td>
+          <td class="border border-dark align-middle" width="45%"><%= @order.total_payment.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row ml-5 mt-3">
+    <div class="col-md-6">
+      <span><strong>注文内容</strong></span>
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr class="table-active">
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="60%">商品</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="20%">単価(税込)</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="10%">個数</th>
+            <th class="border border-dark align-middle" style="font-weight: normal;" width="10%">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.order_details.each do |order_detail| %>
+            <tr>
+              <td class="border border-dark align-middle"><%= order_detail.item.name %></td>
+              <td class="border border-dark align-middle"><%= order_detail.price %></td>
+              <td class="border border-dark align-middle"><%= order_detail.amount %></td>
+              <td class="border border-dark align-middle"><%= order_detail.subtotal %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

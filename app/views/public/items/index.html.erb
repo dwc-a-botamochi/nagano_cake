@@ -1,0 +1,15 @@
+<div class="container m-5"> 
+  <div class="row"> 
+    <div class="col-3 px-4"><%= render 'public/items/genre_list', genres: @genres %></div>
+    <div class="col-9">
+      <div class="col-2 py-3 offset-1">
+        <h4 class="d-flex justify-content-start align-items-end gap-2 text-nowrap">
+        <span>商品一覧</span>
+        <small>（全<%= Item.where(is_active: true).count %>件）</small>
+        </h4>
+      </div>
+      <div class="d-flex flex-wrap  offset-1"><%= render 'index', items: @items %></div>
+      <div class="d-flex justify-content-center mt-4"><%= paginate @items %></div>
+    </div>
+  </div>
+</div>
